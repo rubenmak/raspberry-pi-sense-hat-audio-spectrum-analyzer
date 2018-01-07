@@ -11,9 +11,10 @@ http://www.dx.com/p/mi-305-plug-and-play-mini-usb-microphone-black-287434#.WlJ5q
 but any mic that works with the Raspberry Pi should be working.
 
 ## install dependencies
-
-`sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install python-dev python-imaging python-smbus python-alsaaudio sense-hat python-numpy`
+```
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install python-dev python-imaging python-smbus python-alsaaudio sense-hat python-numpy
+```
 
 and for using the microphone:
 
