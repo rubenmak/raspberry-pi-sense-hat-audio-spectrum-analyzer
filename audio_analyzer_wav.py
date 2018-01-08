@@ -30,7 +30,7 @@ output.setformat(aa.PCM_FORMAT_S16_LE)
 output.setperiodsize(chunk)
 
 # Colours
-rotation = 270
+rotation = 0
 yellow = (255, 255, 0)  # Yellow
 red = (255, 0, 0)  # Red
 green = (0, 204, 0)  # Green
