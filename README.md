@@ -29,3 +29,12 @@ This version has a somewhat more creative LED visualisation:
 
 And this version uses the microphone:
 `python audio_analyzer_mic.py`
+
+## orientation
+The default orientation of the sense HAT is, with the GPIO 
+connection on top, the left side being the bottom of the visualisation.
+When mounted on the pi, it means you need point the USB-ports
+upward for the correct orientation.
+
+If you want to position differently, change the `rotation = 0` 
+in the code to 90, 180 or 270.
