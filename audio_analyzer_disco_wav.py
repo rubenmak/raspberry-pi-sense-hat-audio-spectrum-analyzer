@@ -33,6 +33,7 @@ output.setperiodsize(chunk)
 
 # Colours
 rotation = 0
+sense.set_rotation(rotation)
 yellow = (255, 255, 0)
 red = (255, 0, 0)
 blue = (0, 0, 255)
@@ -68,7 +69,7 @@ def volume_frequency_range(power, freq_low, freq_high):
         return 0
 
 
-def calculate_levels(data, chunk, sample_rate):
+def calculate_levels(data):
     global matrix
 
     # Convert raw data (ASCII string) to numpy array
@@ -86,9 +87,9 @@ def calculate_levels(data, chunk, sample_rate):
     matrix[2] = volume_frequency_range(power, 313, 625)
     matrix[3] = volume_frequency_range(power, 625, 1250)
     matrix[4] = volume_frequency_range(power, 1250, 2500)
-    matrix[5] = volume_frequency_range(power, 2500, 5000)
-    matrix[6] = volume_frequency_range(power, 5000, 10000)
-    matrix[7] = volume_frequency_range(power, 10000, 20000)
+    matrix[5] = volume_frequency_range(power, 2500, 2750)
+    matrix[6] = volume_frequency_range(power, 2750, 5000)
+    matrix[7] = volume_frequency_range(power, 5000, 10000)
 
     # Tidy up column values for the LED matrix
     matrix = np.divide(np.multiply(matrix, weighting), 1000000)
@@ -104,7 +105,7 @@ data = wavfile.readframes(chunk)
 # Loop while audio data present
 while data != '':
     output.write(data)
-    matrix = calculate_levels(data, chunk, sample_rate)
+    matrix = calculate_levels(data)
     figure = empty[:]
     for y in range(0, 8):
             if matrix[y] <= 8:
@@ -116,7 +117,5 @@ while data != '':
             else:
                 for x in range(matrix[y], 24):
                     figure[y * 8 + (x - 16)] = red
-    time.sleep(chunk/sample_rate)  # is this needed?
-    sense.set_rotation(rotation)
-    sense.set_pixels(figure)
+            sense.set_pixels(figure)
     data = wavfile.readframes(chunk)
